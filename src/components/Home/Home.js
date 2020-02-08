@@ -1,5 +1,5 @@
-import {Container, Jumbotron} from "react-bootstrap";
 import React from "react";
+import {Container, Jumbotron} from "react-bootstrap";
 
 export default function Home() {
   return (

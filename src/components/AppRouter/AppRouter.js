@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import Home from "../Home";
-import Calculation from "../Calculation";
+import Home from "../Home/Home";
+import CalcFrom from "../Calculation/CalcFrom";
 
 export default function AppRouter() {
   return (
@@ -26,7 +26,7 @@ export default function AppRouter() {
               <Home />
             </Route>
             <Route path="/calculations">
-              <Calculation />
+              <CalcFrom />
             </Route>
           </Switch>
       </Container>
