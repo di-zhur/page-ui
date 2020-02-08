@@ -7,7 +7,7 @@ export default function Home() {
       <Container>
         <h1>Computing application</h1>
         <p>
-          Computing application...............
+          Computing application
         </p>
       </Container>
     </Jumbotron>

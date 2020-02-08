@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-//import CalculationApi from "../../../api/CalculationApi";
 import Form from "react-jsonschema-form";
-import axios from "axios";
+import Http from "axios";
+import {CATEGORY_URL} from "../../util/Config"
 
-//const calculationApi = new CalculationApi();
 
 export default function ItemForm() {
   const [schema, setSchema] = useState( {});
 
   async function fetchSchema() {
-    const result = await axios.get(`http://localhost:5000/api/v1/category/getSchemaParameters/1`);
+    const result = await Http.get(CATEGORY_URL);
     setSchema(result.data);
   }
 
