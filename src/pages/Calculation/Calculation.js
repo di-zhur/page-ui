@@ -1,9 +1,9 @@
 import React from "react";
 import {Link, Route, Switch, useParams, useRouteMatch} from "react-router-dom";
 import {Col, ListGroup, Row, Tab} from "react-bootstrap";
-import ItemForm from "./ItemForm";
+import Counting from "../../components/Counting/Counting";
 
-export default function CalcFrom() {
+export default function Calculation() {
     let { path, url } = useRouteMatch();
     return (
       <div class="pt-3">
@@ -56,7 +56,7 @@ function Topic() {
   return (
     <div>
       <h3>{topicId}</h3>
-      <ItemForm />
+      <Counting />
     </div>
   );
 }

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Form from "react-jsonschema-form";
 import Http from "axios";
-import {CATEGORY_URL} from "../../util/Config"
+import {CATEGORY_URL} from "../../util/ApiConstants"
 
-
-export default function ItemForm() {
+export default function Counting() {
   const [schema, setSchema] = useState( {});
 
   async function fetchSchema() {
