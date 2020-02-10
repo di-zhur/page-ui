@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import Home from "../../pages/Home/Home";
-import Calculation from "../../pages/Calculation/Calculation";
+import Home from "../Home/Home";
+import Calculation from "../Calculation/Calculation";
 
 export default function AppRouter() {
   return (

@@ -56,7 +56,7 @@ function Topic() {
   return (
     <div>
       <h3>{topicId}</h3>
-      <Counting />
+      <Counting categoryId={topicId}/>
     </div>
   );
 }

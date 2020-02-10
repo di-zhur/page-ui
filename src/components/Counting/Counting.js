@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Form from "react-jsonschema-form";
 import Http from "axios";
-import {CATEGORY_URL} from "../../util/ApiConstants"
+import {CATEGORY_URL} from "../../constants/ApiConstants"
 
-export default function Counting() {
+export default function Counting({categoryId}) {
   const [schema, setSchema] = useState( {});
 
   async function fetchSchema() {
@@ -13,9 +13,9 @@ export default function Counting() {
 
   useEffect(() => {
     fetchSchema();
-  }, []);
+  }, [categoryId]);
 
-  const onSubmitForm = ({formData}, e) => {
+  function onSubmitForm({formData}, e) {
     console.log("Data submitted: ",  formData);
   }
 
@@ -28,7 +28,7 @@ export default function Counting() {
   return (
     <div>
       <Form schema={schema}
-            onSubmit={onSubmit}
+            onSubmit={onSubmitForm}
             onError={onErrorForm} />
     </div>
   );
