@@ -1,19 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React  from 'react';
 import Form from "react-jsonschema-form";
-import Http from "axios";
-import {CATEGORY_URL} from "../../constants/ApiConstants"
+import { useCalculationSchema } from "./hooks"
 
 export default function Counting({categoryId}) {
-  const [schema, setSchema] = useState( {});
-
-  async function fetchSchema() {
-    const result = await Http.get(CATEGORY_URL);
-    setSchema(result.data);
-  }
-
-  useEffect(() => {
-    fetchSchema();
-  }, [categoryId]);
+  const schema = useCalculationSchema(categoryId);
 
   function onSubmitForm({formData}, e) {
     console.log("Data submitted: ",  formData);
@@ -22,8 +12,6 @@ export default function Counting({categoryId}) {
   const onErrorForm = (errors) => {
     console.log("I have", errors.length, "errors to fix");
   }
-
-  const onSubmit = ({formData}, e) => console.log("Data submitted: ",  formData);
 
   return (
     <div>
