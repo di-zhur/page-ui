@@ -1,8 +1,7 @@
 import React from "react";
 import {Link, Route, Switch, useParams, useRouteMatch} from "react-router-dom";
 import {Col, Row, Tab, Nav} from "react-bootstrap";
-import CountingForm from "../../components/Counting/CountingForm";
-import CountingList from "../../components/Counting/CountingList";
+import Counting from "../../components/Counting/Counting";
 
 export default function Calculation() {
   let { path, url } = useRouteMatch();
@@ -50,11 +49,7 @@ function TopicCounting() {
   return (
     <div>
       <div>
-        <CountingForm categoryId={topicId}/>
-      </div>
-      <div className="pt-5">
-        <h4>Latest</h4>
-        <CountingList categoryId={topicId}/>
+        <Counting categoryId={topicId}/>
       </div>
     </div>
   );

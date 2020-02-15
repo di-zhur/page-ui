@@ -21,12 +21,7 @@ export function useCalculationList(categoryId) {
   const [calculations, setCalculations] = useState( []);
 
   async function fetchCalculations() {
-    const result = await Http.get(CALCULATION_FIND_URL, {
-      params: {
-        userId: 1,
-        categoryId: 1
-      }
-    });
+    const result = await getCalculations(categoryId);
     setCalculations(result.data);
   }
 
@@ -34,5 +29,14 @@ export function useCalculationList(categoryId) {
     fetchCalculations();
   }, [categoryId]);
 
-  return calculations;
+  return [calculations, setCalculations];
 }
+
+export const getCalculations = (categoryId) => {
+  return Http.get(CALCULATION_FIND_URL, {
+    params: {
+      userId: 1,
+      categoryId: 1
+    }
+  });
+};
