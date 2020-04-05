@@ -30,7 +30,6 @@ function MenuItems({url}) {
   );
 }
 
-
 function SwitchRoute({path}) {
   return (
     <Switch>
