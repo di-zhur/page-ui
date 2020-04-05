@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Container, Jumbotron, InputGroup, FormControl, Button, Row, Col, Table} from "react-bootstrap";
+import {useLinkList, useTopicList} from "./Hooks";
 
 export default function Page() {
     return (
@@ -17,10 +18,10 @@ export default function Page() {
             </Row>
             <Row>
                 <Col md={6}>
-                    <Links/>
+                    <Links url="https://yandex.ru"/>
                 </Col>
                 <Col md={6}>
-                    <Topics/>
+                    <Topics url="https://yandex.ru"/>
                 </Col>
             </Row>
         </div>
@@ -41,25 +42,30 @@ function InputUrl() {
             type="url"
         />
         <InputGroup.Append>
-            <Button variant="success" onClick={(e) => {alert(urlPageValue)}}>GO</Button>
-            <Button variant="secondary" onClick={() => setUrlPageValue("")}>CLEAR</Button>
+            <Button variant="success" onClick={() => {
+                alert(urlPageValue)
+            }}>GO</Button>
+            <Button variant="secondary" onClick={() => setUrlPageValue(null)}>CLEAR</Button>
         </InputGroup.Append>
     </InputGroup>
 }
 
-function go() {
-    alert("go!")
-}
+function Links({url}) {
+    const [links, setLinks] = useLinkList(url);
 
-function clear() {
-    alert("clear!")
-}
+    const linkItems = links.map(e => {
+        return <tr key={e.text.length}>
+            <th>{e.text}</th>
+            <th>
+                <a href={e.url}>Follow the link</a>
+            </th>
+        </tr>
+    });
 
-function Links() {
     return <div className="pt-md-5">
         <Col md={12}>
             <h4>Links:</h4>
-            <Table striped bordered hover size="sm">
+            <Table striped bordered hover size="sm" responsive="lg">
                 <thead>
                 <tr>
                     <th>Text</th>
@@ -67,13 +73,16 @@ function Links() {
                 </tr>
                 </thead>
                 <tbody>
+                {linkItems}
                 </tbody>
             </Table>
         </Col>
     </div>
 }
 
-function Topics() {
+function Topics({url}) {
+    const [topics, setTopics] = useTopicList(url);
+
     return <div className="pt-md-5">
         <Col md={12}>
             <h4>Topics:</h4>

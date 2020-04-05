@@ -18,7 +18,7 @@ export default function AppRouter() {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-            <Container fluid>
+            <Container fluid={true}>
                 <Switch>
                     <Route exact path="/">
                         <Page/>

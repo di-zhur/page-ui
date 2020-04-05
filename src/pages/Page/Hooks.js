@@ -6,13 +6,12 @@ export function useLinkList(url) {
   const [links, setLinks] = useState( []);
 
   async function fetchLinks() {
-    return await extractLinks(url);
+    const result = await extractLinks(url);
+    setLinks(result.data);
   }
 
   useEffect(() => {
-    fetchLinks().then(result => {
-      setLinks(result.data);
-    });
+    fetchLinks();
   }, [url]);
 
   return [links, setLinks];
@@ -28,20 +27,20 @@ export function useTopicList(url) {
   useEffect(() => {
     fetchSchema().then(result => {
       setTopics(result.data);
-    });
+    }).catch(err => console.error(err));
   }, [url]);
 
   return [topics, setTopics];
 }
 
 export const extractLinks = (url) => {
-  return Http.post("http://localhost:8080/extractLinks", {
+  return Http.post("http://localhost:5000/api/v1/page/info/extractLinks", {
     url
   });
 }
 
 export const extractTopics = (url) => {
-  return Http.post("http://localhost:8080/extractTopics", {
+  return Http.post("http://localhost:5000/api/v1/page/info/extractTopics", {
     url
   });
 }
