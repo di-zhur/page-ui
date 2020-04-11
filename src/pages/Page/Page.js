@@ -1,5 +1,5 @@
 import React, {useState, useRef} from "react";
-import {Container, Jumbotron, InputGroup, FormControl, Button, Row, Col, Table} from "react-bootstrap";
+import {Alert, Container, Jumbotron, InputGroup, FormControl, Button, Row, Col, Table} from "react-bootstrap";
 import {useLinkList, useTopicList} from "./Hooks";
 
 export default function Page() {
@@ -35,13 +35,50 @@ export default function Page() {
                 </Col>
             </Row>
             <Row>
-                <Col md={6}>
-                    <Links url={pageUrlValue}/>
-                </Col>
-                <Col md={6}>
-                    <Topics url={pageUrlValue}/>
+                <Col md={12} className="pt-md-2">
+                    <LinkInfo url={pageUrlValue}/>
                 </Col>
             </Row>
+        </div>
+    );
+}
+
+function LinkInfo({url}) {
+
+    const validateUrl = (url) => url !== "" && url !== undefined && url !== {};
+
+    const URL_PATTERN = /^(https?|ftp|torrent|image|irc):\/\/(-\.)?([^\s\/?\.#-]+\.?)+(\/[^\s]*)?$/i;
+
+    return (
+        <div>
+            {
+                validateUrl(url) ?
+                    !url.match(URL_PATTERN) ?
+                        (<div>
+                            <Col md={{span: 6, offset: 3}}>
+                                <Alert variant={"danger"}>
+                                    Please enter a valid link!
+                                </Alert>
+                            </Col>
+                        </div>) :
+                        (<div>
+                            <Row>
+                                <Col md={6}>
+                                    <Links url={url}/>
+                                </Col>
+                                <Col md={6}>
+                                    <Topics url={url}/>
+                                </Col>
+                            </Row>
+                        </div>) :
+                    (<div>
+                        <Col md={{span: 6, offset: 3}}>
+                            <Alert variant={"primary"}>
+                                Please enter link!
+                            </Alert>
+                        </Col>
+                    </div>)
+            }
         </div>
     );
 }
