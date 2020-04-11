@@ -1,8 +1,15 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import {Container, Jumbotron, InputGroup, FormControl, Button, Row, Col, Table} from "react-bootstrap";
 import {useLinkList, useTopicList} from "./Hooks";
 
 export default function Page() {
+    const [pageUrlValue, setPageUrlValue] = useState({});
+    const inputUrlPageEl = useRef(null);
+
+    const goOnClick = () => setPageUrlValue(inputUrlPageEl.current.value);
+
+    const clearOnClick = () => setPageUrlValue("");
+
     return (
         <div>
             <Jumbotron>
@@ -13,52 +20,42 @@ export default function Page() {
             </Jumbotron>
             <Row>
                 <Col md={{span: 6, offset: 3}}>
-                    <InputUrl/>
+                    <InputGroup size="lg">
+                        <FormControl
+                            id="urlPage"
+                            ref={inputUrlPageEl}
+                            placeholder="http://www.example.com"
+                            aria-label="URL page"
+                            aria-describedby="basic-addon2"
+                        />
+                        <InputGroup.Append>
+                            <Button variant="success" onClick={goOnClick}>GO</Button>
+                            <Button variant="secondary" onClick={clearOnClick}>CLEAR</Button>
+                        </InputGroup.Append>
+                    </InputGroup>
                 </Col>
             </Row>
             <Row>
                 <Col md={6}>
-                    <Links url="https://yandex.ru"/>
+                    <Links url={pageUrlValue}/>
                 </Col>
                 <Col md={6}>
-                    <Topics url="https://yandex.ru"/>
+                    <Topics url={pageUrlValue}/>
                 </Col>
             </Row>
         </div>
     );
 }
 
-function InputUrl() {
-    const [urlPageValue, setUrlPageValue] = useState();
-
-    return <InputGroup size="lg">
-        <FormControl
-            id="urlPage"
-            value={urlPageValue}
-            onChange={e => setUrlPageValue(e.target.value)}
-            placeholder="http://www.example.com"
-            aria-label="URL page"
-            aria-describedby="basic-addon2"
-            type="url"
-        />
-        <InputGroup.Append>
-            <Button variant="success" onClick={() => {
-                alert(urlPageValue)
-            }}>GO</Button>
-            <Button variant="secondary" onClick={() => setUrlPageValue(null)}>CLEAR</Button>
-        </InputGroup.Append>
-    </InputGroup>
-}
-
 function Links({url}) {
     const [links, setLinks] = useLinkList(url);
 
-    const linkItems = links.map(e => {
-        return <tr key={e.text.length}>
-            <th>{e.text}</th>
-            <th>
+    const linkItems = links.map((e, i) => {
+        return <tr key={i}>
+            <td>{e.text}</td>
+            <td>
                 <a href={e.url}>Follow the link</a>
-            </th>
+            </td>
         </tr>
     });
 
@@ -83,6 +80,17 @@ function Links({url}) {
 function Topics({url}) {
     const [topics, setTopics] = useTopicList(url);
 
+    const topicItems = topics.map((e, i) => {
+        return <tr key={i}>
+            <td>{e.tag}</td>
+            <td>
+                {e.values.map((e, i) => {
+                    return <li key={i}>{e}</li>;
+                })}
+            </td>
+        </tr>
+    });
+
     return <div className="pt-md-5">
         <Col md={12}>
             <h4>Topics:</h4>
@@ -94,6 +102,7 @@ function Topics({url}) {
                 </tr>
                 </thead>
                 <tbody>
+                {topicItems}
                 </tbody>
             </Table>
         </Col>

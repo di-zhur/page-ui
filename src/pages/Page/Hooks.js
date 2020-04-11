@@ -6,19 +6,20 @@ export function useLinkList(url) {
   const [links, setLinks] = useState( []);
 
   async function fetchLinks() {
-    const result = await extractLinks(url);
-    setLinks(result.data);
+    return await extractLinks(url);
   }
 
   useEffect(() => {
-    fetchLinks();
+    fetchLinks().then(result => {
+      setLinks(result.data)
+    }).catch(err => console.error(err));
   }, [url]);
 
   return [links, setLinks];
 }
 
 export function useTopicList(url) {
-  const [topics, setTopics] = useState( {});
+  const [topics, setTopics] = useState( []);
 
   async function fetchSchema() {
     return await extractTopics(url);
