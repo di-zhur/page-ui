@@ -3,12 +3,12 @@ import {Container, Jumbotron, InputGroup, FormControl, Button, Row, Col, Table} 
 import {useLinkList, useTopicList} from "./Hooks";
 
 export default function Page() {
-    const [pageUrlValue, setPageUrlValue] = useState({});
-    const inputUrlPageEl = useRef(null);
+    const [pageUrlValue, setPageUrlValue] = useState("");
+    const inputUrlPageRef = useRef(null);
 
-    const goOnClick = () => setPageUrlValue(inputUrlPageEl.current.value);
-
-    const clearOnClick = () => setPageUrlValue("");
+    const handleGoClick = () => {
+        setPageUrlValue(inputUrlPageRef.current.value);
+    };
 
     return (
         <div>
@@ -23,14 +23,13 @@ export default function Page() {
                     <InputGroup size="lg">
                         <FormControl
                             id="urlPage"
-                            ref={inputUrlPageEl}
+                            ref={inputUrlPageRef}
                             placeholder="http://www.example.com"
                             aria-label="URL page"
                             aria-describedby="basic-addon2"
                         />
                         <InputGroup.Append>
-                            <Button variant="success" onClick={goOnClick}>GO</Button>
-                            <Button variant="secondary" onClick={clearOnClick}>CLEAR</Button>
+                            <Button variant="success" onClick={handleGoClick}>GO</Button>
                         </InputGroup.Append>
                     </InputGroup>
                 </Col>
@@ -48,7 +47,7 @@ export default function Page() {
 }
 
 function Links({url}) {
-    const [links, setLinks] = useLinkList(url);
+    const [links] = useLinkList(url);
 
     const linkItems = links.map((e, i) => {
         return <tr key={i}>
@@ -78,7 +77,7 @@ function Links({url}) {
 }
 
 function Topics({url}) {
-    const [topics, setTopics] = useTopicList(url);
+    const [topics] = useTopicList(url);
 
     const topicItems = topics.map((e, i) => {
         return <tr key={i}>
