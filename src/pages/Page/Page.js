@@ -1,6 +1,7 @@
 import React, {useState, useRef} from "react";
 import {Alert, Container, Jumbotron, InputGroup, FormControl, Button, Row, Col, Table} from "react-bootstrap";
 import {useLinkList, useTopicList} from "./Hooks";
+import {URL_PATTERN} from "./Constants";
 
 export default function Page() {
     const [pageUrlValue, setPageUrlValue] = useState("");
@@ -46,8 +47,6 @@ export default function Page() {
 function LinkInfo({url}) {
 
     const validateUrl = (url) => url !== "" && url !== undefined && url !== {};
-
-    const URL_PATTERN = /^(https?|ftp|torrent|image|irc):\/\/(-\.)?([^\s\/?\.#-]+\.?)+(\/[^\s]*)?$/i;
 
     return (
         <div>

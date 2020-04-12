@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import Http from "axios";
+import {EXTRACT_LINKS_URL, EXTRACT_TOPICS_URL} from "./Constants";
 
 export function useLinkList(url) {
     const [links, setLinks] = useState([]);
@@ -40,13 +41,13 @@ export function useTopicList(url) {
 }
 
 export const extractLinks = (url) => {
-    return Http.post("http://localhost:5000/api/v1/page/info/extractLinks", {
+    return Http.post(EXTRACT_LINKS_URL, {
         url
     });
 }
 
 export const extractTopics = (url) => {
-    return Http.post("http://localhost:5000/api/v1/page/info/extractTopics", {
+    return Http.post(EXTRACT_TOPICS_URL, {
         url
     });
 }
