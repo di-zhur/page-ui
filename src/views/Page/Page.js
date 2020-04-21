@@ -1,7 +1,7 @@
 import React, {useState, useRef} from "react";
 import {Alert, Container, Jumbotron, InputGroup, FormControl, Button, Row, Col, Table} from "react-bootstrap";
 import {useLinkList, useTopicList} from "./Hooks";
-import {URL_PATTERN} from "./Constants";
+import {URL_PATTERN} from "../../constants/PageConstants";
 
 export default function Page() {
     const [pageUrlValue, setPageUrlValue] = useState("");

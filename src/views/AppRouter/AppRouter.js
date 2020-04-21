@@ -2,7 +2,6 @@ import React from "react";
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import {Navbar, Nav, Container} from 'react-bootstrap';
 import Page from "../Page/Page";
-import Calculation from "../Calculation/Calculation";
 
 export default function AppRouter() {
     return (
@@ -24,7 +23,7 @@ export default function AppRouter() {
                         <Page/>
                     </Route>
                     <Route path="/calculations">
-                        <Calculation/>
+                        <Page/>
                     </Route>
                 </Switch>
             </Container>

@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import Http from "axios";
-import {EXTRACT_LINKS_URL, EXTRACT_TOPICS_URL} from "./Constants";
+import {EXTRACT_LINKS_URL, EXTRACT_TOPICS_URL} from "../../constants/PageConstants";
 
 export function useLinkList(url) {
     const [links, setLinks] = useState([]);
